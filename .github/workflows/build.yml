@@ -1,0 +1,20 @@
+  - name: Build Fabric mod JAR
+    uses: actions/setup-java@v4
+    with:
+      distribution: temurin
+      java-version: '21'
+
+  - name: Install Gradle
+    uses: gradle/actions/setup-gradle@v4
+    with:
+      gradle-version: '8.10.2'
+
+  - name: Build mod
+    run: gradle build --no-daemon
+
+  - name: Upload JAR
+    uses: actions/upload-artifact@v4
+    with:
+      name: slime-rancher-1.21.1
+      path: build/libs/*.jar
+      if-no-files-found: error
